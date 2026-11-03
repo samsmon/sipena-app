@@ -12,6 +12,8 @@ use App\Http\Controllers\StudentController;
 // use student controller
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
+// use lecturer controller
+use App\Http\Controllers\LecturerDashboardController;
 
 Route::get('/', function () {
     return view('pages.dashboard.read');
@@ -53,6 +55,26 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/asprak/schedule/{id}', [AsprakDashboardController::class, 'destroySchedule'])
         ->name('asprak.schedule.destroy');
+
+    
+    Route::get('/lecture/dashboard', function () {
+        return app(LecturerDashboardController::class)->index();
+    })->name('lecture.dashboard');
+    // Route::get('/lecture/application/{id}', function () {
+    //     return app(LecturerDashboardController::class)->updateStatus();
+    // })->name('lecture.application.update');
+    
+    // // Group khusus Dosen
+    // Route::prefix('lecture')->group(function () {
+
+    //     // Halaman Dashboard Dosen
+    //     Route::get('/dashboard', [LecturerDashboardController::class, 'index'])
+    //         ->name('lecture.dashboard');
+
+    //     // Action Terima/Tolak
+    //     Route::patch('/application/{id}', [LecturerDashboardController::class, 'updateStatus'])
+    //         ->name('lecture.application.update');
+    // });
 });
 
 // lecturers
@@ -71,4 +93,4 @@ Route::post('/vacancy/apply', [ApplyVacancyController::class, 'store'])->name('v
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

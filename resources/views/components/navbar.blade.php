@@ -22,7 +22,7 @@
                 @endif
                 {{-- Menu Dosen --}}
                 @if (auth()->user()->role === 'lecture')
-                    <li><a href="#" class="hover:tw-text-red-600 tw-transition">Lihat Pengajuan</a></li>
+                    <li><a href="{{ route('lecture.dashboard') }}" class="hover:tw-text-red-600 tw-transition">Lihat Pengajuan</a></li>
                     <li><a href="#" class="hover:tw-text-red-600 tw-transition">Validasi</a></li>
                 @endif
 
