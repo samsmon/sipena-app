@@ -71,7 +71,7 @@ class CourseController extends Controller
         $course = Course::create([
             'course_code' => $request->course_code,
             'course_name' => $request->course_name,
-            'major'=> $request->major,
+            'major' => $request->major,
         ]);
 
         // attach lecturers
@@ -118,12 +118,15 @@ class CourseController extends Controller
         $course->update([
             'course_code' => $request->course_code,
             'course_name' => $request->course_name,
-            'major'=> $request->schedule_start[$id],
+            // 'a' => $request->schedule_id[$id],
         ]);
 
         // --- Update lecturers ---
         $lecturers = $request->lecturers ?? [];
         $course->lecturers()->sync($lecturers);
+
+        $schedule_id = $request->schedule_id ?? [];
+        // $course->schedules()->sync($schedule_id);
 
         // --- Update schedules ---
         $days = $request->schedule_day ?? [];
@@ -147,6 +150,10 @@ class CourseController extends Controller
         }
 
         return redirect()->route('course.index')->with('success', 'Course updated successfully');
+        // return response()->json([
+        //     'message' => 'Course created successfully!',
+        //     'course' => $course,
+        // ]);
     }
 
     /**

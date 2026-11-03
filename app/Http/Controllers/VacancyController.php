@@ -23,6 +23,7 @@ class VacancyController extends Controller
 
         $vacancies = Vacancy::with('course')->latest()->get();
         return view('vacancy.index', compact('vacancies'));
+        // return response()->json($vacancies);
     }
 
     /**
